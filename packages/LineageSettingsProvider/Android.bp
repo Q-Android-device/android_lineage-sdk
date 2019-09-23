@@ -15,19 +15,14 @@
 //
 
 android_app {
+    name: "LineageSettingsProvider",
     srcs: ["src/**/*.java"],
     resource_dirs: ["res"],
 
-    name: "LineageSettingsProvider",
     certificate: "platform",
     privileged: true,
 
     static_libs: [
-        "android-support-v4",
-        "android-support-v7-appcompat",
-        "android-support-v7-preference",
-        "android-support-v7-recyclerview",
-        "android-support-v14-preference",
         "org.lineageos.platform.internal",
     ],
 }

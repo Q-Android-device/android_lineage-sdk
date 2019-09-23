@@ -17,12 +17,11 @@
 package org.lineageos.tests.versioning.unit;
 
 import android.content.Context;
-import android.os.Binder;
 import android.test.AndroidTestCase;
 import android.test.suitebuilder.annotation.LargeTest;
-import android.test.suitebuilder.annotation.SmallTest;
 import android.util.Log;
 import android.util.Pair;
+
 import org.lineageos.tests.LineageOSTestApplication;
 import org.lineageos.tests.versioning.unit.apiv2.ApiV2PriorReleaseInterfaces;
 import org.lineageos.tests.versioning.unit.apiv4.ApiV4PriorReleaseInterfaces;
@@ -31,9 +30,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
-
-import android.support.test.runner.AndroidJUnit4;
-import android.support.test.runner.AndroidJUnitRunner;
 
 import java.io.IOException;
 import java.lang.reflect.Field;

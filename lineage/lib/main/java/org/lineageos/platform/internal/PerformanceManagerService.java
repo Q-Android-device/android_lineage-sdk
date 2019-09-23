@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2014 The CyanogenMod Project
- *               2018 The LineageOS Project
+ *               2018-2019 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -43,7 +43,6 @@ import com.android.server.ServiceThread;
 
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
-import java.lang.Thread;
 import java.util.ArrayDeque;
 import java.util.Date;
 import java.util.Locale;
@@ -108,7 +107,7 @@ public class PerformanceManagerService extends LineageSystemService {
 
     // PowerManager ServiceType to use when we're only
     // interested in gleaning global battery saver state.
-    private static final int SERVICE_TYPE_DUMMY = ServiceType.GPS;
+    private static final int SERVICE_TYPE_DUMMY = ServiceType.LOCATION;
 
     public PerformanceManagerService(Context context) {
         super(context);

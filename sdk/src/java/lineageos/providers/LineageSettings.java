@@ -138,6 +138,36 @@ public final class LineageSettings {
      */
     public static final String CALL_METHOD_MIGRATE_SETTINGS_FOR_USER = "migrate_settings_for_user";
 
+    /**
+     * @hide - Private call() method to list the entire system table
+     */
+    public static final String CALL_METHOD_LIST_SYSTEM = "LIST_system";
+
+    /**
+     * @hide - Private call() method to list the entire secure table
+     */
+    public static final String CALL_METHOD_LIST_SECURE = "LIST_secure";
+
+    /**
+     * @hide - Private call() method to list the entire global table
+     */
+    public static final String CALL_METHOD_LIST_GLOBAL = "LIST_global";
+
+    /**
+     * @hide - Private call() method to delete an entry from the system table
+     */
+    public static final String CALL_METHOD_DELETE_SYSTEM = "DELETE_system";
+
+    /**
+     * @hide - Private call() method to delete an entry from the secure table
+     */
+    public static final String CALL_METHOD_DELETE_SECURE = "DELETE_secure";
+
+    /**
+     * @hide - Private call() method to delete an entry from the global table
+     */
+    public static final String CALL_METHOD_DELETE_GLOBAL = "DELETE_global";
+
     // endregion
 
     // Thread-safe.
@@ -195,7 +225,7 @@ public final class LineageSettings {
                 arg.putString(Settings.NameValueTable.VALUE, value);
                 arg.putInt(CALL_METHOD_USER_KEY, userId);
                 IContentProvider cp = lazyGetProvider(cr);
-                cp.call(cr.getPackageName(), mCallSetCommand, name, arg);
+                cp.call(cr.getPackageName(), AUTHORITY, mCallSetCommand, name, arg);
             } catch (RemoteException e) {
                 Log.w(TAG, "Can't set key " + name + " in " + mUri, e);
                 return false;
@@ -252,7 +282,7 @@ public final class LineageSettings {
                         args = new Bundle();
                         args.putInt(CALL_METHOD_USER_KEY, userId);
                     }
-                    Bundle b = cp.call(cr.getPackageName(), mCallGetCommand, name, args);
+                    Bundle b = cp.call(cr.getPackageName(), AUTHORITY, mCallGetCommand, name, args);
                     if (b != null) {
                         String value = b.getPairValue();
                         // Don't update our cache for reads of other users' data
@@ -2145,18 +2175,6 @@ public final class LineageSettings {
         }
 
         /**
-         * @hide
-         */
-        public static boolean shouldInterceptSystemProvider(String key) {
-            switch (key) {
-                case System.SYSTEM_PROFILES_ENABLED:
-                    return true;
-                default:
-                    return false;
-            }
-        }
-
-        /**
          * Mapping of validators for all system settings.  This map is used to validate both valid
          * keys as well as validating the values for those keys.
          *
@@ -3210,16 +3228,6 @@ public final class LineageSettings {
             VALIDATORS.put(TRUST_WARNINGS, TRUST_WARNINGS_VALIDATOR);
             VALIDATORS.put(VOLUME_PANEL_ON_LEFT, VOLUME_PANEL_ON_LEFT_VALIDATOR);
         }
-
-        /**
-         * @hide
-         */
-        public static boolean shouldInterceptSystemProvider(String key) {
-            switch (key) {
-                default:
-                    return false;
-            }
-        }
     }
 
     /**
@@ -3679,13 +3687,6 @@ public final class LineageSettings {
          */
         public static boolean isLegacySetting(String key) {
             return ArrayUtils.contains(LEGACY_GLOBAL_SETTINGS, key);
-        }
-
-        /**
-         * @hide
-         */
-        public static boolean shouldInterceptSystemProvider(String key) {
-            return false;
         }
     }
 }
